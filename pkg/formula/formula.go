@@ -32,8 +32,9 @@ const (
 	ReposDir      = "repos"
 	TmpDir        = "tmp"
 	DefaultConfig = "config.json"
-	PwdEnv        = "PWD"
-	CPwdEnv       = "CURRENT_PWD"
+	PwdEnv        = "CURRENT_PWD"
+	CtxEnv        = "CONTEXT"
+	VerboseEnv    = "VERBOSE_MODE"
 	BinUnix       = "run.sh"
 	BinWindows    = "run.bat"
 	BinDir        = "bin"
@@ -91,11 +92,11 @@ type (
 )
 
 type PreRunner interface {
-	PreRun(def Definition, local bool) (Setup, error)
+	PreRun(def Definition, docker bool) (Setup, error)
 }
 
 type Runner interface {
-	Run(def Definition, inputType api.TermInputType, local bool) error
+	Run(def Definition, inputType api.TermInputType, docker bool, verbose bool) error
 }
 
 type PostRunner interface {
